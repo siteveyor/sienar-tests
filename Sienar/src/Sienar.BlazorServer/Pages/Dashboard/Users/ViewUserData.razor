@@ -1,0 +1,28 @@
+@inherits ActionPage<ViewUserData, IAdminAccountService>
+
+<DocTitle Title="View user"></DocTitle>
+
+@if (_user == null)
+{
+	<FullWidthLoadingSpinner/>
+	return;
+}
+
+<Card Title="@_user.Username"
+      Subtitle="@string.Join(", ", _user.Roles)"
+      Icon="@(_user.EmailConfirmed ? Icons.Material.Filled.VerifiedUser : "")">
+	<CardContent>
+		@* TODO: provide proper user editing *@
+		@* <UpdatableValueContent Name="Email" *@
+		@*                        Value="@_user.Email" *@
+		@*                        OnClick="ShowUserEmailModal"/> *@
+		@* <UpdatableValueContent Name="Password" *@
+		@*                        Value="********" *@
+		@*                        OnClick="ShowUserPasswordModal"/> *@
+	</CardContent>
+	<CardActions>
+		<PrimaryButton Link="@($"{Urls.Dashboard.Users.Index}/{UserId}/roles")">
+			Edit roles
+		</PrimaryButton>
+	</CardActions>
+</Card>

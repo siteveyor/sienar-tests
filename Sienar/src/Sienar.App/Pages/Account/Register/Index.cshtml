@@ -1,0 +1,25 @@
+﻿@page
+@model Sienar.Pages.Account.Register.IndexModel
+
+@{
+	ViewData[ViewDataKeys.Title] = "Register";
+}
+
+<form method="post">
+	<form-card form-title="Register"
+	           form-error="@Model.ErrorMessage"
+	           submit-text="Register">
+		<text-input asp-for="Register.Username"
+		            placeholder="Username"/>
+		<text-input asp-for="Register.Email"
+		            placeholder="Email address"/>
+		<text-input asp-for="Register.Password"
+		            placeholder="Password"/>
+		<text-input asp-for="Register.ConfirmPassword"
+		            placeholder="Confirm password"/>
+
+		<check-input asp-for="Register.AcceptTos">
+			I accept the <a asp-page="@Urls.Privacy">Terms of Service</a>
+		</check-input>
+	</form-card>
+</form>

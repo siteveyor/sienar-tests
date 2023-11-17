@@ -1,0 +1,35 @@
+﻿@page "{id:guid}"
+@model Sienar.Pages.Base.EditPageBase<SienarUserDto>
+
+@{
+	ViewData[ViewDataKeys.Title] = Model.Dto is null
+		? "User not found"
+		: $"Edit {Model.Dto.Username}";
+}
+
+@if (Model.Dto is null)
+{
+	<partial name="Partials/NotFound" model="@(new NotFoundModel {Name = "User", Id = Model.Id})"/>
+	return;
+}
+
+<form method="post">
+	<form-card form-title="Edit @Model.Dto!.Username"
+               form-error="@Model.ErrorMessage"
+               submit-text="Update user"
+               link-text="Return to users listing"
+               link-page="@Urls.Dashboard.Users.UsersIndex"
+               hide-reset-button>
+    	<input asp-for="Dto!.Id"
+    	       type="hidden"/>
+    	<input asp-for="Dto!.ConcurrencyStamp"
+    	       type="hidden"/>
+    	<text-input asp-for="Dto!.Username"
+    	            placeholder="Username"/>
+	    <text-input asp-for="Dto!.Email"
+	                placeholder="Email address"/>
+	    <text-input asp-for="Dto!.Password"
+	                value="@Model.Dto!.Password"
+	                placeholder="Password"/>
+    </form-card>
+</form>

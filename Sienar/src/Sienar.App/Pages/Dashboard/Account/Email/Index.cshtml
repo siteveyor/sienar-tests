@@ -1,0 +1,20 @@
+﻿@page
+@model Sienar.Pages.Dashboard.Account.Email.IndexModel
+
+@{
+	ViewData[ViewDataKeys.Title] = "Change email";
+}
+
+<form method="post">
+	<form-card form-title="Change email"
+	           form-error="@Model.ErrorMessage"
+	           submit-text="Update email"
+	           hide-reset-button>
+		<text-input asp-for="EmailChange.Email"
+		            placeholder="Email address"/>
+		<text-input asp-for="EmailChange.ConfirmEmail"
+		            placeholder="Confirm email address"/>
+		<text-input asp-for="EmailChange.ConfirmPassword"
+		            placeholder="Confirm password"/>
+	</form-card>
+</form>

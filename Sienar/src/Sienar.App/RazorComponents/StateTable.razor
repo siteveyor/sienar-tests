@@ -1,0 +1,40 @@
+﻿@using Sienar.Constants
+@using Sienar.Infrastructure.States
+
+@inherits IndexTable<StateDto>
+
+<Table Title="States"
+       Items="Items"
+       Filter="Filter">
+	<TableHead>
+		<TableHeading Name="@nameof(StateDto.Id)"
+		              NonSortable>
+			ID
+		</TableHeading>
+		<TableHeading Name="@nameof(StateDto.Name)">
+			Name
+		</TableHeading>
+		<TableHeading Name="@nameof(StateDto.Abbreviation)">
+			Abbreviation
+		</TableHeading>
+		<TableHeading NonSortable>
+			Actions
+		</TableHeading>
+	</TableHead>
+
+	<TableBody>
+		<td>@context.Id</td>
+		<td>@context.Name</td>
+		<td>@context.Abbreviation</td>
+		<td>
+			<a class="btn btn-outline-warning"
+			   href="@($"{Urls.Dashboard.States.Edit}/{context.Id}")">
+				<i class="fas fa-pencil"></i>
+			</a>
+			<a class="btn btn-outline-danger"
+			   href="@($"{Urls.Dashboard.States.Delete}/{context.Id}")">
+				<i class="fas fa-trash-alt"></i>
+			</a>
+		</td>
+	</TableBody>
+</Table>

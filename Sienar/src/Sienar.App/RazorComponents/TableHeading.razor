@@ -1,0 +1,17 @@
+﻿@inherits TableHeadingBase
+
+<th class="text-muted">
+	@if (!NonSortable)
+	{
+		<a class="text-decoration-none @(IsActive ? "" : "text-muted")"
+		   href="@CreateSortLink()">
+			@ChildContent
+
+			<i class="ms-1 fas fa-@(IsDescending ? "chevron-down" : "chevron-up")"></i>
+		</a>
+	}
+	else
+	{
+		@ChildContent
+	}
+</th>

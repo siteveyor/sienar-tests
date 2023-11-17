@@ -1,0 +1,31 @@
+﻿@page "{id:guid}"
+@model Sienar.Pages.Dashboard.Users.Roles
+
+@{
+	ViewData[ViewDataKeys.Title] = Model.Dto is null
+		? "User not found"
+		: $"Update {Model.Dto.Username}'s roles";
+}
+
+@if (Model.Dto is null)
+{
+	<partial name="Partials/NotFound" model="@(new NotFoundModel {Name = "User", Id = Model.Id})"/>
+	return;
+}
+
+<form method="post">
+	<form-card form-error="@Model.ErrorMessage"
+	           form-title="Edit user roles"
+	           link-page="@Urls.Dashboard.Users.UsersIndex"
+	           link-text="Return to users listing"
+	           submit-text="Update roles"
+	           hide-reset-button>
+		@foreach (var role in Model.AvailableRoles)
+		{
+			<check-input asp-for="RoleIds"
+			             value="@role.Id">
+				@role.Name
+			</check-input>
+		}
+	</form-card>
+</form>

@@ -1,0 +1,19 @@
+﻿@page
+@model IndexModel
+@using Sienar.Identity
+@using Project.Data
+@inject IAdminAccountService AccountService
+
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+	<h1 class="display-4">Welcome</h1>
+	<ul>
+		@foreach (var user in (await AccountService.Get())!.Result!.Items)
+		{
+			<li>@user.Username</li>
+		}
+	</ul>
+</div>

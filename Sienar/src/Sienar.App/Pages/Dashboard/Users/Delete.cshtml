@@ -1,0 +1,27 @@
+﻿@page "{id:guid}"
+@model Sienar.Pages.Base.DeletePageBase<SienarUserDto>
+
+@{
+	ViewData[ViewDataKeys.Title] = Model.Dto is null
+		? "User not found"
+		: $"Delete {Model.Dto.Username}";
+}
+
+@if (Model.Dto is null)
+{
+	<partial name="Partials/NotFound" model="@(new NotFoundModel { Name = "User", Id = Model.Id })"/>
+	return;
+}
+
+<form method="post">
+	<form-card form-title="Delete @Model.Dto.Username"
+	           form-error="@Model.ErrorMessage"
+	           form-color="danger"
+	           submit-text="Yes, delete user"
+	           submit-button-style="danger"
+	           link-text="No, return to users listing"
+	           link-page="@Urls.Dashboard.Users.UsersIndex"
+	           hide-reset-button>
+		<p>Are you sure you want to delete @Model.Dto.Username? This can't be undone!</p>
+	</form-card>
+</form>

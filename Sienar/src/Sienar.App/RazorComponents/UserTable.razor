@@ -1,0 +1,44 @@
+﻿@using Sienar.Constants
+@using Sienar.Infrastructure.States
+
+@inherits IndexTable<Sienar.Identity.SienarUserDto>
+
+<Table Title="Users"
+       Items="Items"
+       Filter="Filter">
+	<TableHead>
+		<TableHeading Name="@nameof(StateDto.Id)"
+		              NonSortable>
+			ID
+		</TableHeading>
+		<TableHeading Name="@nameof(StateDto.Name)">
+			Username
+		</TableHeading>
+		<TableHeading Name="@nameof(StateDto.Abbreviation)">
+			Email address
+		</TableHeading>
+		<TableHeading NonSortable>
+			Actions
+		</TableHeading>
+	</TableHead>
+
+	<TableBody>
+		<td>@context.Id</td>
+		<td>@context.Username</td>
+		<td>@context.Email</td>
+		<td>
+			<a class="btn btn-outline-primary"
+			   href="@Urls.Dashboard.Users.Roles/@context.Id">
+				<i class="fas fa-shield-halved"></i>
+			</a>
+			<a class="btn btn-outline-warning"
+			   href="@($"{Urls.Dashboard.Users.Edit}/{context.Id}")">
+				<i class="fas fa-pencil"></i>
+			</a>
+			<a class="btn btn-outline-danger"
+			   href="@($"{Urls.Dashboard.Users.Delete}/{context.Id}")">
+				<i class="fas fa-trash-alt"></i>
+			</a>
+		</td>
+	</TableBody>
+</Table>

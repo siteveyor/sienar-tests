@@ -1,0 +1,19 @@
+﻿.sienar-dashboard-nav {
+	width: 225px;
+
+	.dropend {
+		.dropdown-toggle {
+			i {
+				font-size: 20px;
+			}
+
+			&::after {
+				display: none;
+			}
+		}
+	}
+
+	.sienar-dashboard-icon {
+		width: 40px;
+	}
+}

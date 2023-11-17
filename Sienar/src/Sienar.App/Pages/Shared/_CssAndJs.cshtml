@@ -1,0 +1,43 @@
+﻿@using Sienar.Infrastructure.Plugins
+@using Sienar.Tools
+@using System.Text.Json
+@inject IStyleProvider StyleProvider
+@inject IScriptProvider ScriptProvider
+@inject IModuleImportMapProvider ImportMapProvider
+
+<link href="https://fonts.googleapis.com"
+      rel="preconnect"/>
+<link crossorigin
+      href="https://fonts.gstatic.com"
+      rel="preconnect"/>
+
+@foreach (var resource in StyleProvider.GetStylesheets())
+{
+	<link href="@resource.Url"
+	      crossorigin="@RenderUtils.Parse(resource.Mode)"
+	      referrerpolicy="@RenderUtils.Parse(resource.Referrer)"
+	      integrity="@resource.Integrity"
+	      rel="stylesheet"/>
+}
+
+<script type="importmap">
+{
+	"imports": @Html.Raw(JsonSerializer.Serialize(ImportMapProvider.GetImportMap()))
+}
+</script>
+
+<script type="text/javascript">
+window.sienar = {};
+</script>
+
+@foreach (var resource in ScriptProvider.GetScripts())
+{
+	<script type="@RenderUtils.ParseIsJsModule(resource.IsModule)"
+	        src="@resource.Url"
+	        crossorigin="@RenderUtils.Parse(resource.Mode)"
+	        referrerpolicy="@RenderUtils.Parse(resource.Referrer)"
+	        integrity="@resource.Integrity"
+	        async="@resource.IsAsync"
+	        defer="@resource.ShouldDefer">
+</script>
+}

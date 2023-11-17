@@ -1,0 +1,12 @@
+﻿@page
+@model Sienar.Pages.Account.Register.SuccessfulModel
+
+@{
+	ViewData[ViewDataKeys.Title] = "Registration successful";
+}
+
+<h1>Registration successful</h1>
+
+<p>
+	Welcome, @Model.Username! Please check for an email sent to @Model.Email. Click the link in the welcome email to verify your account. You won't be able to log in until you've verified your account.
+</p>

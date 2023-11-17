@@ -1,0 +1,11 @@
+﻿@page
+@model Sienar.Pages.Base.TablePageModelBase<Sienar.Infrastructure.States.StateDto>
+
+@{
+	ViewData[ViewDataKeys.Title] = "States";
+	Layout = "_DashboardLayout";
+}
+
+<component type="@typeof(RazorComponents.StateTable)"
+           render-mode="Static"
+           param-Filter="@Model.Filter"/>

@@ -1,0 +1,44 @@
+@model Sienar.TagHelpers.Forms.FormCardModel
+
+<section class="card">
+	<header class="card-body bg-@Model.FormColor">
+		<h1 class="card-title my-0 text-white">@Model.Title</h1>
+		@if (!string.IsNullOrEmpty(Model.Subtitle))
+		{
+			<h2 class="card-subtitle mb-0 mt-2 text-white small">@Model.Subtitle</h2>
+		}
+	</header>
+
+	@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+	{
+		<p role="alert"
+		   class="card-body text-danger mb-0">
+			@Model.ErrorMessage
+		</p>
+	}
+
+	<div class="card-body">
+		@Model.Content
+	</div>
+
+	<div class="card-body">
+		<button type="submit"
+		        class="btn btn-@Model.SubmitButtonStyle">
+			@Model.SubmitText
+		</button>
+		@if (!Model.HideResetButton)
+		{
+			<button type="reset"
+			        class="btn btn-@Model.ResetButtonStyle ms-3">
+				@Model.ResetText
+			</button>
+		}
+		@if (!string.IsNullOrEmpty(Model.LinkPage))
+		{
+			<a asp-page="@Model.LinkPage"
+			   class="ms-3 @Model.LinkTextColor">
+				@Model.LinkText
+			</a>
+		}
+	</div>
+</section>

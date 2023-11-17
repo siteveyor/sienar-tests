@@ -1,0 +1,37 @@
+@{
+// False warning about SortLabel lambdas having incorrect nullability
+#pragma warning disable CS8622
+}
+
+@inherits ActionPage<UsersIndex, IAdminAccountService>
+@attribute [Authorize(Roles = Roles.Admin)]
+@attribute [Route(Urls.Dashboard.Users.Index)]
+@layout DashboardLayout
+
+<DocTitle Title="Users listing"/>
+
+<TemplatedTable TItem="SienarUserDto"
+                TableTitle="Site users"
+                LoadData="Service.Get">
+	<HeaderContent>
+		<SortLabel For="(SienarUserDto u) => u.Username">
+			Username
+		</SortLabel>
+		<SortLabel For="(SienarUserDto u) => u.Email">
+			Email address
+		</SortLabel>
+		<MudTh>
+			Actions
+		</MudTh>
+	</HeaderContent>
+
+	<RowTemplate>
+		<MudTd DataLabel="Username">@context.Username</MudTd>
+        <MudTd DataLabel="Email address">@context.Email</MudTd>
+        <MudTd DataLabel="Actions">
+        	<PrimaryIconButton Link="@($"{Urls.Dashboard.Users.Index}/{context.Id}")"
+        	                   Title="@($"View user {context.Username}")"
+        	                   Icon="@Icons.Material.Filled.RemoveRedEye"/>
+        </MudTd>
+	</RowTemplate>
+</TemplatedTable>

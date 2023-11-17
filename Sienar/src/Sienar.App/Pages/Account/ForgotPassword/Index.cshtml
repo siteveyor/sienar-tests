@@ -1,0 +1,20 @@
+﻿@page
+@model Sienar.Pages.Account.ForgotPassword.IndexModel
+
+@{
+	ViewData[ViewDataKeys.Title] = "Forgot password";
+}
+
+<form method="post">
+	<form-card form-title="Forgot password"
+	           form-error="@Model.ErrorMessage"
+	           submit-text="Request reset link"
+	           hide-reset-button>
+		<p>
+			To reset your password, please enter your username or email address in the form below. If there is an account associated with that username or email address, you will receive an email with a link authorizing a password reset.
+		</p>
+
+		<text-input asp-for="Forgot.AccountName"
+		            placeholder="Username or email address"/>
+	</form-card>
+</form>

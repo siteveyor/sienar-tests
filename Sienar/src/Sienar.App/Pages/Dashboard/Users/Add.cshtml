@@ -1,0 +1,26 @@
+﻿@page
+@model Sienar.Pages.Base.AddPageBase<SienarUserDto>
+
+@{
+	ViewData[ViewDataKeys.Title] = "Add new user";
+}
+
+<form method="post">
+	<form-card form-error="@Model.ErrorMessage"
+	           form-title="Add user"
+	           link-page="@Urls.Dashboard.Users.UsersIndex"
+	           link-text="Return to users listing"
+	           submit-text="Add state"
+	           hide-reset-button>
+		<p>
+			To add a new user, fill in the information in the form below. The username and email address should be unique. The password should contain a mix of lowercase letters, uppercase letters, numbers, and special characters, and it should be at least 8 characters long.
+		</p>
+
+		<text-input asp-for="Dto.Username"
+		            placeholder="Username"/>
+		<text-input asp-for="Dto.Email"
+		            placeholder="Email address"/>
+		<text-input asp-for="Dto.Password"
+		            placeholder="Password"/>
+	</form-card>
+</form>

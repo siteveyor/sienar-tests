@@ -1,0 +1,29 @@
+﻿@page "{id:guid}"
+@model Sienar.Pages.Base.DeletePageBase<Sienar.Infrastructure.States.StateDto>
+
+@{
+	ViewData[ViewDataKeys.Title] = Model.Dto is null
+		? "State not found"
+		: $"Delete {Model.Dto.Name}";
+}
+
+@if (Model.Dto is null)
+{
+	<partial name="Partials/NotFound" model="@(new NotFoundModel { Name = "State", Id = Model.Id })"/>
+	return;
+}
+
+<form method="post">
+	<form-card form-title="Delete @Model.Dto.Name"
+	           form-error="@Model.ErrorMessage"
+	           form-color="danger"
+	           submit-text="Yes, delete state"
+	           submit-button-style="danger"
+	           link-text="No, return to states listing"
+	           link-page="@Urls.Dashboard.States.StatesIndex"
+	           hide-reset-button>
+		<input asp-for="Dto!.Id"
+		       type="hidden"/>
+		<p>Are you sure you want to delete @Model.Dto.Name? This can't be undone!</p>
+	</form-card>
+</form>

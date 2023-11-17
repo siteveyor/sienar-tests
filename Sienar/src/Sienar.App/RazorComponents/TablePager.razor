@@ -1,0 +1,120 @@
+﻿@typeparam TDto
+@inherits TablePagerBase<TDto>
+
+<div class="d-flex flex-row justify-content-between">
+	<div class="d-flex flex-row align-items-center">
+		<p class="mb-0">Showing @StartIndex-@EndIndex of @Items.TotalCount</p>
+	</div>
+
+	<ul class="pagination mb-0">
+		@if (IsFirstPage)
+		{
+			<li class="page-item disabled">
+				<span class="page-link">Previous</span>
+			</li>
+			<li class="page-item active">
+				<span class="page-link">1</span>
+			</li>
+		}
+		else
+		{
+			<li class="page-item">
+				<a class="page-link"
+				   href="@CreatePageUrl(Filter.Page - 1)">
+					Previous
+				</a>
+			</li>
+
+			<li class="page-item">
+				<a class="page-link"
+				   href="@CreatePageUrl(1)">
+					1
+				</a>
+			</li>
+		}
+
+		@if (Filter.Page - 3 > 1)
+		{
+			<li class="page-item disabled">
+				<span class="page-link">...</span>
+			</li>
+		}
+
+		@foreach (var pageNumber in PaginationPageNumbers)
+		{
+			@if (pageNumber <= 1 || pageNumber >= TotalPages)
+			{
+				continue;
+			}
+
+			@if (pageNumber == Filter.Page)
+			{
+				<li class="page-item active">
+					<span class="page-link">@pageNumber</span>
+				</li>
+			}
+			else
+			{
+				<li class="page-item">
+					<a class="page-link"
+					   href="@CreatePageUrl(pageNumber)">
+						@pageNumber
+					</a>
+				</li>
+			}
+		}
+
+		@if (Filter.Page + 3 < TotalPages)
+		{
+			<li class="page-item disabled">
+				<span class="page-link">...</span>
+			</li>
+		}
+
+		@if (TotalPages > 1)
+		{
+			@if (Filter.Page == TotalPages)
+			{
+				<li class="page-item active">
+					<span class="page-link">@TotalPages</span>
+				</li>
+			}
+			else
+			{
+				<li class="page-item">
+					<a class="page-link"
+					   href="@CreatePageUrl(TotalPages)">
+						@TotalPages
+					</a>
+				</li>
+			}
+		}
+
+		@if (IsLastPage)
+		{
+			<li class="page-item disabled">
+				<span class="page-link">Next</span>
+			</li>
+		}
+		else
+		{
+			<li class="page-item">
+				<a class="page-link"
+				   href="@CreatePageUrl(Filter.Page + 1)">
+					Next
+				</a>
+			</li>
+		}
+	</ul>
+
+	<div class="d-flex flex-row align-items-center">
+		<p class="me-3 mb-0">Items per page:</p>
+		@foreach (var pageSize in PageSizeNumbers)
+		{
+			<a class="me-3 btn @(Filter.PageSize == pageSize ? "btn-primary" : "btn-outline-primary")"
+			   href="@CreatePageSizeUrl(pageSize)">
+				@pageSize
+			</a>
+		}
+	</div>
+</div>

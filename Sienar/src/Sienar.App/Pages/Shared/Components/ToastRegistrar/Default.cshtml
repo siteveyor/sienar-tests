@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Sienar.Infrastructure.ToastDto>
+@inject IJsonSerializer Serializer
+
+<div id="sienar-toast-container"
+     class="sienar-toast-container toast-container position-absolute p-3 top-0 end-0">
+</div>
+
+<script type="text/javascript">
+window.sienar.notifications = @Html.Raw(Serializer.Serialize(Model));
+</script>

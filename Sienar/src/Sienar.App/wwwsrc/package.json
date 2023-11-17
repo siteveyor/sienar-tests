@@ -1,0 +1,20 @@
+{
+	"name": "wwwsrc",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build:js": "tsc && vite build",
+		"build:sass": "npx sass styles/main.scss ../wwwroot/sienar.css",
+		"build:*": "npm run build:js && npm run build:sass",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"@sienar/razor-client": "file:../../../../frontend/sienar-razor-client",
+		"@types/node": "^20.8.10",
+		"sass": "^1.69.5",
+		"typescript": "^5.0.2",
+		"vite": "^4.4.5"
+	}
+}

@@ -1,0 +1,21 @@
+﻿@page
+@model Sienar.Pages.Account.ResetPassword.IndexModel
+
+@{
+	ViewData[ViewDataKeys.Title] = "Reset password";
+}
+
+<form method="post">
+	<form-card form-title="Reset password"
+	           form-error="@Model.ErrorMessage"
+               submit-text="Reset my password">
+    	<input type="hidden"
+    	       asp-for="ResetPassword.UserId"/>
+    	<input type="hidden"
+    	       asp-for="ResetPassword.VerificationCode"/>
+    	<text-input asp-for="ResetPassword.NewPassword"
+    	            placeholder="New password"/>
+    	<text-input asp-for="ResetPassword.ConfirmNewPassword"
+    	            placeholder="Confirm new password"/>
+    </form-card>
+</form>

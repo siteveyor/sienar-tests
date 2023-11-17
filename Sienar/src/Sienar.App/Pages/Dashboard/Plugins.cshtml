@@ -1,0 +1,59 @@
+﻿@page
+@using Sienar.Infrastructure.Plugins
+@inject IEnumerable<IPlugin> Plugins
+
+@{
+	Layout = "Shared/_DashboardLayout";
+	ViewData[ViewDataKeys.Title] = "Active plugins";
+}
+
+<table class="table">
+	<colgroup>
+		<col span="1"
+		     style="width:250px"/>
+		<col span="1"/>
+	</colgroup>
+	<thead>
+	<tr>
+		<th>Plugin</th>
+		<th>Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	@foreach (var plugin in Plugins)
+	{
+		<tr>
+			<td>
+				<strong>@plugin.PluginData.Name</strong>
+			</td>
+			<td>
+				<p class="mb-0">@plugin.PluginData.Description</p>
+				<p class="mb-0">
+					<span>Version @plugin.PluginData.Version</span> |
+					<span>
+						Developed by
+						<a href="@plugin.PluginData.AuthorUrl"
+						   target="_blank"
+						   class="text-decoration-none">
+							@plugin.PluginData.Author
+						</a>
+					</span> |
+					@if (string.IsNullOrEmpty(plugin.PluginData.Homepage))
+					{
+						<span>(No URL provided)</span>
+					}
+					else
+					{
+						<a href="@plugin.PluginData.Homepage"
+						   target="_blank"
+						   class="text-decoration-none">
+							Plugin homepage
+						</a>
+					}
+				</p>
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>

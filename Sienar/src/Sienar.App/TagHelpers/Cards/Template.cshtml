@@ -1,0 +1,17 @@
+﻿@model Sienar.TagHelpers.Cards.CardModel
+
+@*
+Changes to this template need to also be applied to ~/TagHelpers/Forms/FormCardTemplate.cshtml because manually-rendered templates can't reference tag helpers, so this template is, unfortunately, duplicated.
+*@
+
+<section class="card">
+	<header class="card-body bg-primary">
+		<h1 class="card-title my-0 text-white">@Model.Title</h1>
+		@if (!string.IsNullOrEmpty(Model.Subtitle))
+		{
+			<h2 class="card-subtitle mb-0 mt-2 text-white small">@Model.Subtitle</h2>
+		}
+	</header>
+
+	@Model.Content
+</section>

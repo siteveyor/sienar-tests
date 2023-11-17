@@ -1,0 +1,40 @@
+﻿@attribute [CascadingTypeParameter(nameof(TDto))]
+@typeparam TDto
+@using Sienar.Constants
+@inherits TableBase<TDto>
+
+<div>
+	<div class="bg-dark d-flex flex-row justify-content-between align-items-center px-3 py-2">
+		<h1 class="mb-0 @CssClasses.OffWhiteDarkBgText">@Title</h1>
+		<TableForm Filter="@Filter"/>
+	</div>
+
+	<div class="p-3 border border-dark">
+		<table class="table">
+			<thead>
+			<tr>
+				<CascadingValue Name="Filter"
+				                Value="@Filter">
+					@TableHead
+				</CascadingValue>
+			</tr>
+			</thead>
+
+			<tbody>
+			@foreach (var item in Items.Items)
+			{
+				<tr>
+					@TableBody(item)
+				</tr>
+			}
+			</tbody>
+		</table>
+
+		@if (Items.TotalCount > 0)
+		{
+			<TablePager Filter="Filter"
+			            Items="Items"/>
+		}
+	</div>
+
+</div>

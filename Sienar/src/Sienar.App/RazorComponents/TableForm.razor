@@ -1,0 +1,38 @@
+﻿@inherits TableFormBase
+
+<form method="GET"
+      id="table-search-form">
+	@if (!string.IsNullOrEmpty(Filter.SortName))
+	{
+		<input type="hidden"
+		       name="sortName"
+		       value="@Filter.SortName"/>
+	}
+
+	@if (Filter.SortDescending.HasValue)
+	{
+		<input type="hidden"
+		       name="sortDescending"
+		       value="@Filter.SortDescending.Value"/>
+	}
+
+	<input type="hidden"
+	       name="page"
+	       value="@Filter.Page"/>
+	<input type="hidden"
+	       name="pageSize"
+	       value="@Filter.PageSize"/>
+
+	<div class="input-group bg-white">
+		<input class="form-control border-secondary border-end-0 rounded-0"
+		       id="search-term"
+		       name="searchTerm"
+		       type="text"
+		       value="@Filter.SearchTerm"/>
+		<button class="btn btn-outline-secondary border-start-0 rounded-0"
+		        id="reset-search-term"
+		        type="button">
+			<i class="fas fa-times"></i>
+		</button>
+	</div>
+</form>

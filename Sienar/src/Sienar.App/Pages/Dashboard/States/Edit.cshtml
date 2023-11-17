@@ -1,0 +1,32 @@
+﻿@page "{id:guid}"
+@model Sienar.Pages.Base.EditPageBase<Sienar.Infrastructure.States.StateDto>
+
+@{
+	ViewData[ViewDataKeys.Title] = Model.Dto is null
+		? "State not found"
+		: $"Edit {Model.Dto.Name}";
+}
+
+@if (Model.Dto is null)
+{
+	<partial name="Partials/NotFound" model="@(new NotFoundModel {Name = "State", Id = Model.Id})"/>
+	return;
+}
+
+<form method="post">
+	<form-card form-title="Edit @Model.Dto!.Name"
+	           form-error="@Model.ErrorMessage"
+	           submit-text="Update state"
+	           link-text="Return to states listing"
+	           link-page="@Urls.Dashboard.States.StatesIndex"
+	           hide-reset-button>
+		<input asp-for="Dto!.Id"
+		       type="hidden"/>
+		<input asp-for="Dto!.ConcurrencyStamp"
+		       type="hidden"/>
+		<text-input asp-for="Dto!.Name"
+		            placeholder="Name"/>
+		<text-input asp-for="Dto!.Abbreviation"
+		            placeholder="Abbreviation"/>
+	</form-card>
+</form>

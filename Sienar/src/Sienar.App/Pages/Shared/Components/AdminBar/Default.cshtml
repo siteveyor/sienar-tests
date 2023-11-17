@@ -1,0 +1,67 @@
+﻿@model Sienar.ViewComponents.AdminBarViewModel
+
+@if (!Model.IsSignedIn)
+{
+	return;
+}
+
+@{
+	string linkIcon, linkText, linkHref;
+	if (Model.IsOnDashboard)
+	{
+		linkIcon = "home";
+		linkText = "Home";
+		linkHref = Urls.Home;
+	}
+	else
+	{
+		linkIcon = "gauge";
+		linkText = "Dashboard";
+		linkHref = Urls.Dashboard.DashboardIndex;
+	}
+}
+
+<nav class="sienar-admin-bar d-flex align-items-stretch justify-content-between bg-dark">
+	<div class="d-flex align-items-stretch">
+		<a class="@CssClasses.DashboardDarkButton"
+		   href="@linkHref">
+			<i class="@($" mr-3 fas fa-{linkIcon}")"></i>
+			@linkText
+		</a>
+	</div>
+
+	<div class="dropdown">
+		<button class="@($"{CssClasses.DashboardDarkButton} dropdown-toggle")"
+		        data-bs-toggle="dropdown">
+			Howdy, @Model.Username
+		</button>
+
+		<ul class="dropdown-menu">
+			<li>
+				<a class="dropdown-item"
+				   href="@Urls.Dashboard.Account.EmailChange.EmailChangeIndex">
+					Change email
+				</a>
+			</li>
+			<li>
+				<a class="dropdown-item"
+				   href="@Urls.Dashboard.Account.PasswordChange.PasswordChangeIndex">
+					Change password
+				</a>
+			</li>
+			<li>
+				<a class="dropdown-item"
+				   href="@Urls.Dashboard.Account.PersonalData">
+					Personal data
+				</a>
+			</li>
+			<li>
+				<a class="dropdown-item"
+				   href="@Urls.Account.Logout">
+					Log out
+				</a>
+			</li>
+		</ul>
+	</div>
+
+</nav>

@@ -1,0 +1,11 @@
+﻿@page
+@model Sienar.Pages.Base.TablePageModelBase<Sienar.Identity.SienarUserDto>
+
+@{
+	ViewData[ViewDataKeys.Title] = "Users";
+	Layout = "_DashboardLayout";
+}
+
+<component type="@typeof(RazorComponents.UserTable)"
+           render-mode="Static"
+           param-Filter="@Model.Filter"/>

@@ -1,0 +1,27 @@
+﻿@{
+	// False warning about SortLabel lambdas having incorrect nullability
+	#pragma warning disable CS8622
+}
+
+@using Sienar.Infrastructure.States
+@inherits ActionPage<StatesIndex, IStateService>
+@attribute [Authorize(Roles = Roles.Admin)]
+@attribute [Route(Urls.Dashboard.States.Index)]
+@layout DashboardLayout
+
+<DocTitle Title="States listing"/>
+
+<TemplatedTable TItem="StateDto"
+                TableTitle="States"
+                LoadData="Service.Get">
+	<ToolBarContent>
+    	<PrimaryIconButton Link="@Urls.Dashboard.States.Add"
+    	                   Icon="@Icons.Material.Filled.Add"/>
+    </ToolBarContent>
+
+    <HeaderContent>
+    	<SortLabel For="(StateDto s) => s.Name"/>
+	    <SortLabel For="(StateDto s) => s.Abbreviation"/>
+    	<MudTh>Actions</MudTh>
+    </HeaderContent>
+</TemplatedTable>

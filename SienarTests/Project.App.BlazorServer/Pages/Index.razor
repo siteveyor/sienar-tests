@@ -1,0 +1,71 @@
+﻿@page "/"
+
+@implements IDisposable
+@layout MainLayout
+
+<PageTitle>Index</PageTitle>
+
+<AuthorizeView>
+	<Authorized><p>Hello, @AccountStateProvider.User?.Username. <button @onclick="() => AccountService.Logout()">Log out</button></p></Authorized>
+	<NotAuthorized>
+		<EditForm Model="_login"
+		          OnValidSubmit="DoLogin">
+			<ChildContent Context="editFormContext">
+				<label>Account name</label>
+                <InputText @bind-Value="_login.AccountName"/><br/>
+    
+                <label>Username</label>
+                <InputText @bind-Value="_login.Password"
+                           type="password"/><br/>
+    
+                <MudButton ButtonType="ButtonType.Submit" Color="Color.Primary">Log in</MudButton>
+			</ChildContent>
+		</EditForm>
+	</NotAuthorized>
+</AuthorizeView>
+
+<h1>Hello, world!</h1>
+
+<p>@_message</p>
+
+<NavLink href="/Dashboard">Go to dashboard</NavLink>
+
+@code {
+	private string _message = "You have not tried to log in yet.";
+
+	private LoginDto _login = new();
+
+	[CascadingParameter]
+	private Task<AuthenticationState> AuthenticationState { get; set; } = default!;
+
+	[Inject]
+	private IAccountService AccountService { get; set; } = default!;
+
+	[Inject]
+	private AccountStateProvider AccountStateProvider { get; set; } = default!;
+
+	/// <inheritdoc />
+	protected override void OnInitialized()
+	{
+		AccountStateProvider.OnChange += StateHasChanged;
+	}
+
+	public void Dispose()
+	{
+		AccountStateProvider.OnChange -= StateHasChanged;
+		GC.SuppressFinalize(this);
+	}
+
+	private async Task DoLogin()
+	{
+		var result = await AccountService.Login(_login);
+		if (result.WasSuccessful)
+		{
+			_message = "Login successful!";
+		}
+		else
+		{
+			_message = "Login failed";
+		}
+	}
+}

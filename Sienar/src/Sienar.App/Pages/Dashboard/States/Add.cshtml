@@ -1,0 +1,21 @@
+﻿@page
+@model Sienar.Pages.Base.AddPageBase<Sienar.Infrastructure.States.StateDto>
+@attribute [Authorize(Roles = Roles.Admin)]
+
+@{
+	ViewData[ViewDataKeys.Title] = "Add new state";
+}
+
+<form method="post">
+	<form-card form-title="Add state"
+	           form-error="@Model.ErrorMessage"
+	           submit-text="Add state"
+	           link-text="Return to states listing"
+	           link-page="@Urls.Dashboard.States.StatesIndex"
+	           hide-reset-button>
+		<text-input asp-for="Dto.Name"
+		            placeholder="Name"/>
+		<text-input asp-for="Dto.Abbreviation"
+		            placeholder="Abbreviation"/>
+    </form-card>
+</form>

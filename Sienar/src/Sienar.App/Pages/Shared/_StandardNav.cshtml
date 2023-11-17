@@ -1,0 +1,88 @@
+@using Sienar.Infrastructure
+@inject IUserAccessor UserAccessor
+
+@{
+	var links = new List<(string, string)>
+	{
+		("Home", Urls.Home),
+		("Privacy", Urls.Privacy)
+	};
+
+	var topNavLinks = new List<(string, string)>(links);
+	var sideNavLinks = new List<(string, string)>(links);
+
+	var isSignedIn = UserAccessor.IsSignedIn();
+
+	if (!isSignedIn)
+	{
+		topNavLinks.Add(("Register", Urls.Account.Register.RegisterIndex));
+		topNavLinks.Add(("Log in", Urls.Account.Login));
+	}
+}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3">
+	<a asp-area=""
+	   asp-page="@Urls.Home"
+	   class="navbar-brand">
+		#sitename#
+	</a>
+
+	<button class="navbar-toggler"
+	        data-bs-target="#mobile-nav"
+	        data-bs-toggle="offcanvas">
+		<i class="fas fa-bars"></i>
+	</button>
+
+	<ul class="navbar-nav ms-auto d-none d-lg-flex">
+		@foreach (var link in topNavLinks)
+		{
+			var (text, url) = link;
+			<li class="nav-item">
+				<a asp-area=""
+				   asp-page="@url"
+				   class="nav-link">
+					@text
+				</a>
+			</li>
+		}
+	</ul>
+</nav>
+
+<div class="offcanvas offcanvas-start mobile-nav"
+     id="mobile-nav">
+	<header class="offcanvas-header">
+		<h5 class="offcanvas-title">#sitename#</h5>
+	</header>
+
+	<section class="offcanvas-body d-flex flex-column">
+		<ul class="navbar-nav flex-grow-1">
+			@foreach (var link in sideNavLinks)
+			{
+				var (text, url) = link;
+				<li class="nav-item">
+					<a asp-area=""
+					   asp-page="@url"
+					   class="nav-link">
+						@text
+					</a>
+				</li>
+			}
+		</ul>
+
+		<div>
+			@if (!isSignedIn)
+			{
+				<a asp-area=""
+				   asp-page="@Urls.Account.Register.RegisterIndex"
+				   class="btn btn-outline-secondary d-block mb-3">
+					Register
+				</a>
+				<a asp-area=""
+				   asp-page="@Urls.Account.Login"
+				   class="btn btn-primary d-block">
+					Log in
+				</a>
+			}
+		</div>
+	</section>
+</div>

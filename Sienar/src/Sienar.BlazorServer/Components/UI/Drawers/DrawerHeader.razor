@@ -1,0 +1,8 @@
+<header class="px-4 py-3">
+	<MudText Typo="Typo.h5">@(Options.Value.Name)</MudText>
+	<AuthorizeView>
+		<Authorized>
+			Welcome, @(User?.Username)!
+		</Authorized>
+	</AuthorizeView>
+</header>

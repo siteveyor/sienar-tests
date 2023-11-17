@@ -1,0 +1,35 @@
+﻿@using Sienar.Infrastructure
+@inject IUserAccessor UserAccessor
+
+<!DOCTYPE html>
+<html lang="en"
+      class="@(UserAccessor.IsSignedIn() ? "has-admin-bar" : "")">
+
+<head>
+	<partial name="_Meta"/>
+
+	<title>@ViewData[ViewDataKeys.Title] | #sitename#</title>
+
+	@await RenderSectionAsync("Styles", required: false)
+	@await RenderSectionAsync("Scripts", required: false)
+	@await RenderSectionAsync("Seo", required: false)
+</head>
+<body class="@CssClasses.Layouts.Body">
+
+<vc:admin-bar/>
+
+<partial name="_StandardNav"/>
+
+<main class="@CssClasses.Layouts.Main"
+      role="main">
+	<div class="@CssClasses.Layouts.NarrowContainer">
+		@RenderBody()
+	</div>
+
+	<vc:toast-registrar/>
+</main>
+
+<partial name="_Footer"/>
+
+</body>
+</html>

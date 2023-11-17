@@ -1,0 +1,55 @@
+﻿@using Sienar.Infrastructure
+@inject IMenuGenerator MenuGenerator
+@{
+	var links = MenuGenerator.CreateMenu(SienarMenuNames.Dashboard);
+}
+
+<nav class="flex-column bg-dark px-0 sienar-dashboard-nav">
+	@foreach (var link in links)
+	{
+		@if (link.Sublinks is not null)
+		{
+			<div class="btn-group dropend d-block">
+				<button class="@($"{CssClasses.DashboardDarkButton} dropdown-toggle d-flex w-100 justify-content-between align-items-center")"
+				        data-bs-toggle="dropdown"
+				        type="button">
+					<div class="flex-grow-1 d-flex flex-row">
+						@if (!string.IsNullOrEmpty(link.Icon))
+						{
+							var iconClass = $"{link.Icon} me-2 sienar-dashboard-icon";
+							<i class="@iconClass"></i>
+						}
+						<span>@link.Text</span>
+					</div>
+
+					<i class="fa-solid fa-chevron-right ms-3"></i>
+				</button>
+
+				<ul class="dropdown-menu">
+					@foreach (var sublink in link.Sublinks)
+					{
+						<li>
+							<a class="dropdown-item"
+							   href="@sublink.Url">
+								@sublink.Text
+							</a>
+						</li>
+					}
+				</ul>
+			</div>
+		}
+		else
+		{
+			<a class="@CssClasses.DashboardDarkButton d-block"
+			   href="@link.Url">
+				<div class="w-100 d-flex flex-row align-items-center">
+					@if (!string.IsNullOrEmpty(link.Icon))
+					{
+						<i class="@link.Icon me-2 sienar-dashboard-icon"></i>
+					}
+					<span>@link.Text</span>
+				</div>
+			</a>
+		}
+	}
+</nav>

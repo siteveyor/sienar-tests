@@ -1,0 +1,26 @@
+@page
+@model Sienar.Pages.Account.LoginModel
+
+@{
+	Layout = "_NarrowLayout";
+	ViewData[ViewDataKeys.Title] = "Log in";
+}
+
+<form method="post">
+	<form-card
+		form-title="Log in"
+		link-page="@Urls.Account.ForgotPassword.ForgotPasswordIndex"
+		link-text="I forgot my password"
+		form-error="@Model.ErrorMessage"
+		submit-text="Log in"
+	    hide-reset-button>
+		<text-input
+			asp-for="Account.AccountName"
+			placeholder="Username or email"/>
+		<text-input
+			asp-for="Account.Password"
+			placeholder="Password"/>
+
+		<check-input asp-for="Account.RememberMe"/>
+	</form-card>
+</form>

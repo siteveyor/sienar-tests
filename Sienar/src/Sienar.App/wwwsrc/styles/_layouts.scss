@@ -1,0 +1,19 @@
+﻿$admin-bar-height: 38px;
+$nav-height: 56px;
+
+.has-admin-bar {
+	margin-top: $admin-bar-height;
+}
+
+.sienar-admin-bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: $admin-bar-height;
+}
+
+.narrow-layout {
+	width: 600px;
+	max-width: 90%;
+}

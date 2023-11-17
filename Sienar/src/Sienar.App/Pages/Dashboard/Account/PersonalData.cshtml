@@ -1,0 +1,70 @@
+﻿@page
+@model Sienar.Pages.Dashboard.Account.PersonalDataModel
+
+@{
+	ViewData[ViewDataKeys.Title] = "Personal data";
+}
+
+<card card-title="Personal data">
+	<div class="card-body">
+		<p>
+			By creating an account, you give us personal data that we store. You have the right to know what data we have. You also have the right to request that we delete your personal data.
+		</p>
+		<p class="text-danger">
+			Deleting your personal data from our servers will also delete your account. This cannot be undone!
+		</p>
+	</div>
+
+	<div class="card-body">
+		<a asp-page-handler="PersonalData"
+		   class="btn btn-primary"
+		   target="_blank">
+			Download personal data
+		</a>
+
+		<button class="btn btn-danger"
+		        data-bs-toggle="modal"
+		        data-bs-target="#delete-modal">
+			Delete personal data
+		</button>
+	</div>
+</card>
+
+<div class="modal fade"
+     id="delete-modal"
+     tabindex="-1">
+	<div class="modal-dialog">
+		<form method="post"
+		      asp-page-handler="DeleteAccount"
+		      class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5">Delete account</h1>
+				<button class="btn-close"
+				        type="button"
+				        data-bs-dismiss="modal"></button>
+			</div>
+
+			<div class="modal-body">
+				<p class="text-danger">
+					Are you sure you want to delete your personal data? This will also delete your account and its associated data from our servers. This cannot be undone!
+				</p>
+
+				<text-input asp-for="Dto.Password">
+					Confirm your password to delete your account
+				</text-input>
+			</div>
+
+			<div class="modal-footer">
+				<button class="btn btn-outline-primary"
+				        type="button"
+				        data-bs-dismiss="modal">
+					No, keep my account
+				</button>
+				<button class="btn btn-danger"
+				        type="submit">
+					Yes, delete my account
+				</button>
+			</div>
+		</form>
+	</div>
+</div>

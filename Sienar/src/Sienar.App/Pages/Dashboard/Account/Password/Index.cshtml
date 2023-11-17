@@ -1,0 +1,24 @@
+﻿@page
+@model Sienar.Pages.Dashboard.Account.Password.IndexModel
+
+@{
+	ViewData[ViewDataKeys.Title] = "Change password";
+}
+
+<form method="post">
+	<form-card form-title="Change password"
+	           form-error="@Model.ErrorMessage"
+	           submit-text="Change password"
+	           hide-reset-button>
+		<p>
+			Please select a new password. Your new password should be at least 8 characters long and contain a mix of lowercase and uppercase letters, numbers, and special characters.
+		</p>
+
+		<text-input asp-for="Dto.NewPassword"
+		            placeholder="New password"/>
+		<text-input asp-for="Dto.ConfirmNewPassword"
+		            placeholder="Confirm new password"/>
+		<text-input asp-for="Dto.CurrentPassword"
+		            placeholder="Current password"/>
+	</form-card>
+</form>
